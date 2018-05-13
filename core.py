@@ -1,14 +1,14 @@
 import requests
 import eventlet
 
-def threads_list(board):
+def threads_lite(board):
     return "https://2ch.hk/{0}/threads.json".format(board)
 
-def get_threads(board):
+def get_threads_lite(board):
     timeout = eventlet.Timeout(10)
     try:
-        threads = requests.get(threads_list(board))
-        return threads.json()
+        data = requests.get(threads_lite(board))
+        return data.json()
     except eventlet.timeout.Timeout:
         return None
     finally:
