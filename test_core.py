@@ -7,7 +7,7 @@ def test_threads_lite():
     assert data["board"] == "b"
     assert len(data["threads"]) > 0
 
-    # invalid board specified
+    # invalid board
     data = core.get_threads_lite("perkele")
     assert not data
 
@@ -24,4 +24,18 @@ def test_thread_list():
 
     # page out of range
     data = core.get_thread_list("b", 42)
+    assert not data
+
+    # invalid board specified
+    data = core.get_thread_list("perkele")
+    assert not data
+
+def test_catalog():
+    # valid board
+    data = core.get_catalog("b")
+    assert data["Board"] == "b"
+    assert len(data["threads"]) > 0
+
+    # invalid board
+    data = core.get_catalog("perkele")
     assert not data

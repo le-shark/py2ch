@@ -32,3 +32,18 @@ def get_thread_list(board, page = 0):
         return None
     finally:
         timeout.cancel()
+
+def catalog(board):
+    return "https://2ch.hk/{0}/catalog.json".format(board)
+
+def get_catalog(board):
+    timeout = eventlet.Timeout(10)
+    try:
+        data = requests.get(catalog(board))
+        return data.json()
+    except eventlet.timeout.Timeout:
+        return None
+    except ValueError:  # invalid request/404
+        return None
+    finally:
+        timeout.cancel()
