@@ -39,3 +39,13 @@ def test_catalog():
     # invalid board
     data = core.get_catalog("perkele")
     assert not data
+
+def test_catalog_num():
+    # valid board
+    data = core.get_catalog_num("b")
+    assert data["Board"] == "b"
+    assert len(data["threads"]) > 0
+
+    # invalid board
+    data = core.get_catalog_num("perkele")
+    assert not data

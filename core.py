@@ -47,3 +47,18 @@ def get_catalog(board):
         return None
     finally:
         timeout.cancel()
+
+def catalog_num(board):
+    return "https://2ch.hk/{0}/catalog_num.json".format(board)
+
+def get_catalog_num(board):
+    timeout = eventlet.Timeout(10)
+    try:
+        data = requests.get(catalog_num(board))
+        return data.json()
+    except eventlet.timeout.Timeout:
+        return None
+    except ValueError:  # invalid request/404
+        return None
+    finally:
+        timeout.cancel()
