@@ -1,4 +1,4 @@
-import core
+import py2ch.core as core
 import pytest
 
 def test_threads_lite():
