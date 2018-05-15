@@ -65,3 +65,8 @@ def test_thread():
     # invalid thread id
     thread = core.get_thread("b", 42)
     assert not thread
+
+def test_captcha_id():
+    captcha = core.get_captcha_id("b")
+    assert len(captcha["id"]) == 64
+    assert captcha["result"] == 1

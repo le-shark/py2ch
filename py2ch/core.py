@@ -1,6 +1,8 @@
 import requests
 import eventlet
 
+# GET functions
+
 def threads_lite(board):
     return "https://2ch.hk/{0}/threads.json".format(board)
 
@@ -70,6 +72,23 @@ def get_thread(board, id):
     timeout = eventlet.Timeout(10)
     try:
         data = requests.get(thread(board, id))
+        return data.json()
+    except eventlet.timeout.Timeout:
+        return None
+    except ValueError:  # invalid request/404
+        return None
+    finally:
+        timeout.cancel()
+
+# captcha functions
+
+def captcha_id(board, thread = None):
+    return "https://2ch.hk/api/captcha/2chaptcha/id?board={0}&thread={1}".format(board, thread)
+
+def get_captcha_id(board, thread = None):
+    timeout = eventlet.Timeout(10)
+    try:
+        data = requests.get(captcha_id(board, thread))
         return data.json()
     except eventlet.timeout.Timeout:
         return None
