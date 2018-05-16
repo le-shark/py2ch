@@ -1,5 +1,6 @@
 import requests
 import eventlet
+import webbrowser
 
 # GET functions
 
@@ -96,3 +97,9 @@ def get_captcha_id(board, thread = None):
         return None
     finally:
         timeout.cancel()
+
+def get_captcha_image(id):
+    return "https://2ch.hk/api/captcha/2chaptcha/image/{0}".format(id)
+
+def open_image(path):
+    webbrowser.open_new(path)

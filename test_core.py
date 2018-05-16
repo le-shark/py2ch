@@ -70,3 +70,7 @@ def test_captcha_id():
     captcha = core.get_captcha_id("b")
     assert len(captcha["id"]) == 64
     assert captcha["result"] == 1
+
+def test_captcha_image():
+    core.open_image(core.get_captcha_image(core.get_captcha_id("b")["id"]))
+    assert True
