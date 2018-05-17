@@ -99,3 +99,18 @@ def get_captcha_id(board, thread = None):
 
 def get_captcha_image(id):
     return "https://2ch.hk/api/captcha/2chaptcha/image/{0}".format(id)
+
+def captcha_settings(board):
+    return "https://2ch.hk/api/captcha/settings/{0}".format(board)
+
+def get_captcha_settings(board):
+    timeout = eventlet.Timeout(10)
+    try:
+        data = requests.get(captcha_settings(board))
+        return data.json()
+    except eventlet.timeout.Timeout:
+        return None
+    except ValueError:  # invalid request/404
+        return None
+    finally:
+        timeout.cancel()

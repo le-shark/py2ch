@@ -72,9 +72,14 @@ def test_captcha_id():
     assert len(captcha["id"]) == 64
     assert captcha["result"] == 1
 
-def open_image(path):
+'''def open_image(path):
     webbrowser.open_new(path)
 
 def test_captcha_image():
     open_image(core.get_captcha_image(core.get_captcha_id("b")["id"]))
-    assert True
+    assert True'''
+
+def test_captcha_settings():
+    data = core.get_captcha_settings("b")
+    assert data["enabled"] == 1
+    assert data["result"] == 1
