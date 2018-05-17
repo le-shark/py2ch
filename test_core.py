@@ -1,5 +1,6 @@
 import py2ch.core as core
 import pytest
+import webbrowser
 
 def test_threads_lite():
     # valid board
@@ -71,6 +72,9 @@ def test_captcha_id():
     assert len(captcha["id"]) == 64
     assert captcha["result"] == 1
 
+def open_image(path):
+    webbrowser.open_new(path)
+
 def test_captcha_image():
-    core.open_image(core.get_captcha_image(core.get_captcha_id("b")["id"]))
+    open_image(core.get_captcha_image(core.get_captcha_id("b")["id"]))
     assert True
